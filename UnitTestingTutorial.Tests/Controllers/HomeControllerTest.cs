@@ -83,7 +83,7 @@ namespace UnitTestingTutorial.Tests.Controllers
             Assert.IsNotNull(result);
         }
     }
-
+    //Mock Session object
     public class MockHttpSession : HttpSessionStateBase
     {
         Dictionary<string, object> m_SessionStorage = new Dictionary<string, object>();
