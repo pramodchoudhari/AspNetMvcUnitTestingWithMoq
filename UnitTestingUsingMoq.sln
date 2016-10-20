@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingUsingMoq", "UnitTestingTutorial\UnitTestingUsingMoq.csproj", "{11269051-1F72-47E4-8617-7AC8505A0101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestingUsingMoq.Tests", "UnitTestingTutorial.Tests\UnitTestingUsingMoq.Tests.csproj", "{5C439C01-6E7A-4DB5-BBE8-71839E5331E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11269051-1F72-47E4-8617-7AC8505A0101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11269051-1F72-47E4-8617-7AC8505A0101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11269051-1F72-47E4-8617-7AC8505A0101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11269051-1F72-47E4-8617-7AC8505A0101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C439C01-6E7A-4DB5-BBE8-71839E5331E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C439C01-6E7A-4DB5-BBE8-71839E5331E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C439C01-6E7A-4DB5-BBE8-71839E5331E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C439C01-6E7A-4DB5-BBE8-71839E5331E6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

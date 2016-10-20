@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+Testing Session in MVC in Four Lines of Code
+
+Controller testing in the model-view-controller (MVC) is simple. ?The level of difficulty is increased with the use of Session in the controller, but only slightly. In this post I show how to simply test controllers which use Session.
+
+Let’s try testing this controller method:
+
+testing_session_1
+
+The following code (in a test project) will throw a null reference exception in the Index() method:
+
+testing_session_2
+
+The call to Session[“Name”] fails here, throwing a null reference exception. Session is a variable in the executing controller’s HttpContext, which is null unless explicitly set. When running the MVC project the browser supplies that context. In tests, however, we must explicitly provide it.
+
+Luckily this is simple to do with a mock object. The mocking framework I like to use is Moq, which is what this example will implement. Setting up Moq is as simple as downloading the .dll and adding it as a reference to your project.
+
+For our test to work, we need to set the ProviderController’s HttpContext and have that context return a valid Session variable. The following code implements this:
+
+testing_session_3
+
+Here you can see we create two mock objects, one for our controller context and one for our session (Session of type HttpSessionStateBase). By setting the context variable to return our mock session object for the .HttpContext.Session call, we are effectively setting the variable to be returned when we reference Session in our controller. Finally, we explicitly set this ProviderController instance’s ControllerContext.
+
+Fortunately, this code will execute just fine! If all you need is code execution, you’re set. Unfortunately, if you want to test the contents of session variables, there is still work to do. With our current code, the following assert will fail:
+
+testing_session_4
+
+Why? We are still passing a mock object as our session; mock objects are a simple scaffold and don’t have any functionality whatsoever. The mock object is able to accept a variable assignment but is unable to store that value in memory. For that purpose, we’ll need an actual session object. HttpSessionStateBase is an abstract class so we won’t have any luck instantiating that. The simplest solution is to create a MockHttpSession object implementing HttpSessionStateBase:
+
+testing_session_5
+
+Luckily Session objects are quite simple and it’s easy to mock their behavior. The only functionality we care about is assigning to a session variable, we accomplish this by using a dictionary. Now to modify the test to implement our MockHttpSession object:
+
+testing_session_6
+
+This test will run and pass! Note that our session variable is no longer a mock object; it’s an instance of our MockHttpSession object.
+
+Typically I’ll wrap the creation/association of context into its own method. This saves you from typing those additional 4 LOC every time you instantiate a controller. Instead, you’ll call that method:
+
+testing_session_7
+
+This gets you back to your original test length, one line to instantiate a controller!
+
+Session in ASP.NET MVC: So testable, even a caveman could do it.
